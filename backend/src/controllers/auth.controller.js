@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import { generateToken } from "../lib/utils.js";
 import { sendWelcomeEmail } from "../emails/emailHandler.js";
 import { ENV } from "../lib/env.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -56,7 +57,6 @@ export const signup = async (req, res) => {
   }
 };
 
-
 export const login = async (req,res) => {
   const { email, password} = req.body;
 
@@ -86,4 +86,22 @@ export const login = async (req,res) => {
 export const logout = async (req,res) => {
   res.cookie("jwt", "", {maxAge:0})
   res.status(200).json({message: "Logout was succesful "})
+};
+
+export const updateProfile = async (req,res) => {
+  try {
+    const profilePic = req.body
+    if(!profilePic) return res.status(400).json({message: "Profile Picture is Required."})
+
+    const userId = req.user._id
+
+    await cloudinary.uploader.upload(profilePic)
+
+    await User.findByIdAndUpdate(userId, 
+      {profilePic:uploadResponse.secure_url},
+      {new: true}
+    );
+  } catch (error) {
+    
+  }
 };
