@@ -71,18 +71,52 @@ const Header = ({
         </div>
 
         <div className="header__right">
+          {/* Chat actions */}
+          {selectedUser && (
+            <div className="header__actions">
+              <Button
+                variant="ghost"
+                size="small"
+                className="header__action-button"
+                title="Search in conversation"
+              >
+                🔍
+              </Button>
+              <Button
+                variant="ghost"
+                size="small"
+                className="header__action-button"
+                title="Call"
+              >
+                📞
+              </Button>
+              <Button
+                variant="ghost"
+                size="small"
+                className="header__action-button"
+                title="Video call"
+              >
+                📹
+              </Button>
+            </div>
+          )}
+
           {/* Current user profile */}
-          <div className="header__current-user">
+          <div className="header__current-user" onClick={handleProfileClick}>
+            <div className="header__current-user-info">
+              <span className="header__current-user-name">
+                {currentUser?.fullName}
+              </span>
+              <span className="header__current-user-status">
+                Online
+              </span>
+            </div>
             <UserAvatar 
               user={currentUser} 
-              size="small" 
-              showOnlineStatus={false}
-              onClick={handleProfileClick}
+              size="medium" 
+              showOnlineStatus={true}
               className="header__profile-avatar"
             />
-            <span className="header__current-user-name">
-              {currentUser?.fullName}
-            </span>
           </div>
 
           {/* Settings/Menu button */}

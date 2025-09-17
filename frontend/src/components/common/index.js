@@ -5,3 +5,4 @@ export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Modal } from './Modal';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as ProfileModal } from './ProfileModal';
+export { default as DevHelper } from './DevHelper';

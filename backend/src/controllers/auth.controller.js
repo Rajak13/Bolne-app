@@ -99,6 +99,13 @@ export const updateProfile = async (req, res) => {
     const { fullName, profilePic } = req.body;
     const userId = req.user._id;
 
+    console.log("Update profile request:", { 
+      userId, 
+      hasFullName: !!fullName, 
+      hasProfilePic: !!profilePic,
+      profilePicLength: profilePic ? profilePic.length : 0
+    });
+
     if (!fullName && !profilePic) {
       return res.status(400).json({ message: "At least one field is required to update" });
     }
@@ -110,8 +117,21 @@ export const updateProfile = async (req, res) => {
     }
 
     if (profilePic) {
-      const uploadResponse = await cloudinary.uploader.upload(profilePic);
-      updateData.profilePic = uploadResponse.secure_url;
+      try {
+        console.log("Uploading image to Cloudinary...");
+        const uploadResponse = await cloudinary.uploader.upload(profilePic, {
+          folder: "chat-app-profiles",
+          transformation: [
+            { width: 400, height: 400, crop: "fill" },
+            { quality: "auto" }
+          ]
+        });
+        console.log("Cloudinary upload successful:", uploadResponse.secure_url);
+        updateData.profilePic = uploadResponse.secure_url;
+      } catch (cloudinaryError) {
+        console.error("Cloudinary upload error:", cloudinaryError);
+        return res.status(400).json({ message: "Failed to upload image. Please try again." });
+      }
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -119,6 +139,8 @@ export const updateProfile = async (req, res) => {
       updateData,
       { new: true }
     ).select("-password");
+
+    console.log("Profile updated successfully for user:", userId);
 
     res.status(200).json({
       user: updatedUser

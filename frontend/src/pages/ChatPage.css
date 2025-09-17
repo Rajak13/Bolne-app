@@ -3,9 +3,10 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-gray-50);
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
   overflow: hidden;
   position: relative;
+  padding-bottom: 80px; /* Always account for bottom bar */
 }
 
 .chat-page__content {
@@ -14,21 +15,28 @@
   min-height: 0; /* Important for flex scrolling */
   position: relative;
   transition: all var(--transition-normal);
+  border-radius: 12px 12px 0 0;
+  background-color: var(--color-white);
+  margin: 0 8px 8px 8px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
 }
 
 /* Desktop layout */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .chat-page {
     height: 100vh;
+    padding-bottom: 80px; /* Persistent bottom bar */
   }
   
   .chat-page__content {
-    /* Sidebar and chat area are side by side */
+    margin: 8px;
+    border-radius: 16px;
   }
 }
 
 /* Tablet and Mobile layout */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .chat-page {
     height: 100vh;
     height: 100dvh; /* Use dynamic viewport height on mobile */
@@ -39,20 +47,22 @@
     position: relative;
     overflow: hidden;
     height: 100%;
+    margin: 4px;
+    border-radius: 12px 12px 0 0;
   }
 }
 
 /* Small mobile adjustments */
 @media (max-width: 480px) {
   .chat-page {
-    padding-bottom: 70px; /* Smaller bottom bar on very small screens */
+    padding-bottom: 80px; /* Consistent bottom bar height */
   }
 }
 
 /* Landscape mobile adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1024px) and (orientation: landscape) {
   .chat-page {
-    padding-bottom: 60px; /* Smaller bottom bar in landscape */
+    padding-bottom: 70px; /* Slightly smaller in landscape */
   }
 }
 
@@ -78,13 +88,13 @@
 }
 
 /* Responsive header visibility */
-@media (max-width: 768px) {
-  .chat-page .desktop-hidden {
+@media (max-width: 1024px) {
+  .chat-page .desktop-only {
     display: none;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .chat-page .mobile-only {
     display: none;
   }

@@ -10,11 +10,11 @@ const ChatPage = () => {
   // Check if we're on mobile
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth <= 768;
+      const mobile = window.innerWidth <= 1024; // Increased breakpoint for better tablet experience
       setIsMobile(mobile);
       
       // On desktop, sidebar should be open by default
-      // On mobile, sidebar should be closed by default
+      // On mobile/tablet, sidebar should be closed by default
       if (!mobile && !isSidebarOpen) {
         setIsSidebarOpen(true);
       }
@@ -63,10 +63,11 @@ const ChatPage = () => {
 
   return (
     <div className={chatPageClasses} ref={swipeRef}>
+      {/* Desktop Header */}
       <Header 
         onToggleSidebar={handleToggleSidebar}
         isSidebarOpen={isSidebarOpen}
-        className="desktop-hidden" // Hide header on mobile, use bottom bar instead
+        className="desktop-only"
       />
       
       <div className="chat-page__content">
@@ -78,11 +79,10 @@ const ChatPage = () => {
         <ChatArea />
       </div>
 
-      {/* Mobile bottom navigation */}
+      {/* Persistent Bottom Navigation */}
       <BottomBar 
         onToggleSidebar={handleToggleSidebar}
         isSidebarOpen={isSidebarOpen}
-        className="mobile-only"
       />
     </div>
   );

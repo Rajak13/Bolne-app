@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider, ChatProvider } from './context';
-import { ProtectedRoute } from './components/common';
+import { ProtectedRoute, DevHelper } from './components/common';
 import { HomePage, LoginPage, SignupPage, ChatPage } from './pages';
 import { ROUTES } from './utils/routes';
 import './App.css';
@@ -31,6 +31,9 @@ function App() {
               <Route path="*" element={<HomePage />} />
             </Routes>
           </div>
+          
+          {/* Development helper */}
+          <DevHelper />
         </Router>
       </ChatProvider>
     </AuthProvider>

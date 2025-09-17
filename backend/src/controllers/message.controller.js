@@ -41,6 +41,14 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
+    console.log("Send message request:", { 
+      senderId, 
+      receiverId, 
+      hasText: !!text, 
+      hasImage: !!image,
+      imageLength: image ? image.length : 0
+    });
+
     if (!text && !image) {
       return res.status(400).json({ message: "Text or image is required." });
     }
@@ -54,9 +62,22 @@ export const sendMessage = async (req, res) => {
 
     let imageUrl;
     if (image) {
-      // upload base64 image to cloudinary
-      const uploadResponse = await cloudinary.uploader.upload(image);
-      imageUrl = uploadResponse.secure_url;
+      try {
+        console.log("Uploading message image to Cloudinary...");
+        // upload base64 image to cloudinary
+        const uploadResponse = await cloudinary.uploader.upload(image, {
+          folder: "chat-app-messages",
+          transformation: [
+            { width: 800, height: 600, crop: "limit" },
+            { quality: "auto" }
+          ]
+        });
+        imageUrl = uploadResponse.secure_url;
+        console.log("Message image uploaded successfully:", imageUrl);
+      } catch (cloudinaryError) {
+        console.error("Cloudinary upload error for message:", cloudinaryError);
+        return res.status(400).json({ message: "Failed to upload image. Please try again." });
+      }
     }
 
     const newMessage = new Message({
@@ -67,6 +88,7 @@ export const sendMessage = async (req, res) => {
     });
 
     await newMessage.save();
+    console.log("Message saved successfully:", newMessage._id);
 
     // const receiverSocketId = getReceiverSocketId(receiverId);
     // if (receiverSocketId) {

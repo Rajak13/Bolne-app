@@ -150,7 +150,7 @@ export const AuthProvider = ({ children }) => {
       
       dispatch({
         type: AUTH_ACTIONS.LOGIN_SUCCESS,
-        payload: { user: response.user },
+        payload: { user: response },
       });
       
       return response;
@@ -171,7 +171,7 @@ export const AuthProvider = ({ children }) => {
       
       dispatch({
         type: AUTH_ACTIONS.SIGNUP_SUCCESS,
-        payload: { user: response.user },
+        payload: { user: response },
       });
       
       return response;

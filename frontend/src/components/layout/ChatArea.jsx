@@ -85,9 +85,30 @@ const ChatArea = ({ className = '' }) => {
       <div className={chatAreaClasses}>
         <div className="chat-area__empty-state">
           <div className="chat-area__empty-content">
-            <div className="chat-area__empty-icon">💬</div>
+            <div className="chat-area__empty-illustration">
+              <div className="chat-area__empty-icon">💬</div>
+              <div className="chat-area__empty-bubbles">
+                <div className="chat-area__bubble chat-area__bubble--1">Hi there!</div>
+                <div className="chat-area__bubble chat-area__bubble--2">Hello! 👋</div>
+                <div className="chat-area__bubble chat-area__bubble--3">How are you?</div>
+              </div>
+            </div>
             <h2>Welcome to Chat App</h2>
             <p>Select a user from the sidebar to start chatting</p>
+            <div className="chat-area__features">
+              <div className="chat-area__feature">
+                <span className="chat-area__feature-icon">🔒</span>
+                <span>End-to-end encrypted</span>
+              </div>
+              <div className="chat-area__feature">
+                <span className="chat-area__feature-icon">📱</span>
+                <span>Works on all devices</span>
+              </div>
+              <div className="chat-area__feature">
+                <span className="chat-area__feature-icon">⚡</span>
+                <span>Real-time messaging</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -119,9 +140,19 @@ const ChatArea = ({ className = '' }) => {
         ) : messages.length === 0 ? (
           <div className="chat-area__no-messages">
             <div className="chat-area__no-messages-content">
+              <div className="chat-area__no-messages-avatar">
+                <div className="chat-area__avatar-placeholder">
+                  {selectedUser.fullName?.charAt(0)?.toUpperCase() || '?'}
+                </div>
+              </div>
               <div className="chat-area__no-messages-icon">👋</div>
-              <h3>Start a conversation</h3>
-              <p>Send a message to {selectedUser.fullName} to get started</p>
+              <h3>Start a conversation with {selectedUser.fullName}</h3>
+              <p>This is the beginning of your chat history</p>
+              <div className="chat-area__conversation-starters">
+                <div className="chat-area__starter">Say hello 👋</div>
+                <div className="chat-area__starter">Ask how they're doing 😊</div>
+                <div className="chat-area__starter">Share something interesting 💡</div>
+              </div>
             </div>
           </div>
         ) : (
