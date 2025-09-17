@@ -3,10 +3,11 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+  background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-gray-800) 100%);
   overflow: hidden;
   position: relative;
   padding-bottom: 80px; /* Always account for bottom bar */
+  transition: padding-bottom var(--transition-normal);
 }
 
 .chat-page__content {
@@ -16,10 +17,11 @@
   position: relative;
   transition: all var(--transition-normal);
   border-radius: 12px 12px 0 0;
-  background-color: var(--color-white);
+  background-color: var(--color-surface-primary);
   margin: 0 8px 8px 8px;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  border: 1px solid var(--color-gray-700);
 }
 
 /* Desktop layout */

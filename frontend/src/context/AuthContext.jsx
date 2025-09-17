@@ -58,13 +58,20 @@ const authReducer = (state, action) => {
 
     case AUTH_ACTIONS.LOGIN_FAILURE:
     case AUTH_ACTIONS.SIGNUP_FAILURE:
-    case AUTH_ACTIONS.UPDATE_PROFILE_FAILURE:
       return {
         ...state,
         user: null,
         isAuthenticated: false,
         isLoading: false,
         error: action.payload.error,
+      };
+
+    case AUTH_ACTIONS.UPDATE_PROFILE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error,
+        // Keep user authenticated even if profile update fails
       };
 
     case AUTH_ACTIONS.LOGOUT:

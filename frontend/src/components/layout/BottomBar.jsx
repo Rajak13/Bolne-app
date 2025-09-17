@@ -7,6 +7,8 @@ import './BottomBar.css';
 const BottomBar = ({ 
   onToggleSidebar,
   isSidebarOpen = false,
+  isCollapsed = false,
+  onToggleCollapse,
   className = '' 
 }) => {
   const { user } = useAuth();
@@ -39,11 +41,34 @@ const BottomBar = ({
 
   const bottomBarClasses = [
     'bottom-bar',
+    isCollapsed ? 'bottom-bar--collapsed' : '',
     className
   ].filter(Boolean).join(' ');
 
   return (
     <nav className={bottomBarClasses}>
+      {/* Collapse toggle button */}
+      {!isCollapsed && (
+        <button
+          className="bottom-bar__collapse-toggle"
+          onClick={onToggleCollapse}
+          aria-label="Minimize bottom bar"
+        >
+          ⌄
+        </button>
+      )}
+      
+      {/* Expand button when collapsed */}
+      {isCollapsed && (
+        <button
+          className="bottom-bar__expand-button"
+          onClick={onToggleCollapse}
+          aria-label="Show bottom bar"
+        >
+          ⌃
+        </button>
+      )}
+      
       <div className="bottom-bar__container">
         {/* Contacts/Users Tab */}
         <button

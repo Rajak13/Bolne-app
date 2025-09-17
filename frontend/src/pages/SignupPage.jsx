@@ -300,9 +300,6 @@ const SignupPage = () => {
               disabled={isLoading || isSubmitting}
               autoComplete="email"
             />
-            <div className="form-hint">
-              <small>📧 Note: Email verification is currently limited to authorized domains. If you encounter issues, please contact support.</small>
-            </div>
           </div>
 
           <div className="form-group">

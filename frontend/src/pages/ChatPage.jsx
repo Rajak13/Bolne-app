@@ -6,6 +6,7 @@ import './ChatPage.css';
 const ChatPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Default closed on mobile
   const [isMobile, setIsMobile] = useState(false);
+  const [isBottomBarCollapsed, setIsBottomBarCollapsed] = useState(false);
 
   // Check if we're on mobile
   useEffect(() => {
@@ -36,6 +37,10 @@ const ChatPage = () => {
 
   const handleOpenSidebar = () => {
     setIsSidebarOpen(true);
+  };
+
+  const handleToggleBottomBar = () => {
+    setIsBottomBarCollapsed(!isBottomBarCollapsed);
   };
 
   // Swipe gesture support for mobile
@@ -83,6 +88,8 @@ const ChatPage = () => {
       <BottomBar 
         onToggleSidebar={handleToggleSidebar}
         isSidebarOpen={isSidebarOpen}
+        isCollapsed={isBottomBarCollapsed}
+        onToggleCollapse={handleToggleBottomBar}
       />
     </div>
   );

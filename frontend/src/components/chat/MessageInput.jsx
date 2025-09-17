@@ -150,6 +150,16 @@ const MessageInput = ({
     img.src = URL.createObjectURL(file);
   };
 
+  // Convert file to base64
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
   // Remove selected image
   const handleRemoveImage = () => {
     setSelectedImage(null);
@@ -186,7 +196,14 @@ const MessageInput = ({
     }
     
     if (selectedImage) {
-      messageData.image = selectedImage;
+      // Convert image to base64 for backend
+      try {
+        const base64Image = await convertFileToBase64(selectedImage);
+        messageData.image = base64Image;
+      } catch (error) {
+        setSendError('Failed to process image. Please try again.');
+        return;
+      }
     }
     
     // Store message data for potential retry
