@@ -37,13 +37,14 @@ export const signup = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    generateToken(savedUser._id, res);
+    const token = generateToken(savedUser._id, res);
 
     res.status(201).json({
       _id: savedUser._id,
       fullName: savedUser.fullName,
       email: savedUser.email,
       profilePic: savedUser.profilePic,
+      token: token
     });
 
     try {
@@ -61,19 +62,24 @@ export const login = async (req,res) => {
   const { email, password} = req.body;
 
   try {
+    if (!email || !password) {
+      return res.status(400).json({message: "Email and password are required"});
+    }
+
     const user = await User.findOne({email})
     if(!user) return res.status(400).json({message: "Invalid credentials"})
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password)
-    if(!password) return res.status(400).json({message: "Invalid credentials"})
+    if(!isPasswordCorrect) return res.status(400).json({message: "Invalid credentials"})
 
-    generateToken(user._id,res)
+    const token = generateToken(user._id, res)
 
     res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
-      profilePic: user.profilePic, 
+      profilePic: user.profilePic,
+      token: token
     })
 
 
@@ -88,23 +94,37 @@ export const logout = async (req,res) => {
   res.status(200).json({message: "Logout was succesful "})
 };
 
-export const updateProfile = async (req,res) => {
+export const updateProfile = async (req, res) => {
   try {
-    const profilePic = req.body
-    if(!profilePic) return res.status(400).json({message: "Profile Picture is Required."})
+    const { fullName, profilePic } = req.body;
+    const userId = req.user._id;
 
-    const userId = req.user._id
+    if (!fullName && !profilePic) {
+      return res.status(400).json({ message: "At least one field is required to update" });
+    }
 
-    await cloudinary.uploader.upload(profilePic)
+    const updateData = {};
+    
+    if (fullName) {
+      updateData.fullName = fullName;
+    }
 
-    await User.findByIdAndUpdate(userId, 
-      {profilePic:uploadResponse.secure_url},
-      {new: true}
-    );
+    if (profilePic) {
+      const uploadResponse = await cloudinary.uploader.upload(profilePic);
+      updateData.profilePic = uploadResponse.secure_url;
+    }
 
-    res.status(200).json(updatedUser)
+    const updatedUser = await User.findByIdAndUpdate(
+      userId, 
+      updateData,
+      { new: true }
+    ).select("-password");
+
+    res.status(200).json({
+      user: updatedUser
+    });
   } catch (error) {
-    console.error("Error in update controller:", error);
-    res.status(500).json({ message: "Internal error occurred" })
+    console.error("Error in update profile controller:", error);
+    res.status(500).json({ message: "Internal error occurred" });
   }
 };

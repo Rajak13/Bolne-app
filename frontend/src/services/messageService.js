@@ -8,7 +8,7 @@ import httpClient from './httpClient.js';
  */
 export const getContacts = async () => {
   try {
-    const response = await httpClient.get('/messages/contacts');
+    const response = await httpClient.get('/message/contacts');
     
     // Enhance each user with additional information
     const enhancedUsers = response.map(user => ({
@@ -34,7 +34,7 @@ export const getContacts = async () => {
  */
 export const getChatPartners = async () => {
   try {
-    const response = await httpClient.get('/messages/chats');
+    const response = await httpClient.get('/message/chats');
     
     // Enhance each user with last message information
     const enhancedUsers = await Promise.all(
@@ -84,7 +84,7 @@ export const getMessages = async (userId) => {
       throw new Error('User ID is required');
     }
     
-    const response = await httpClient.get(`/messages/${userId}`);
+    const response = await httpClient.get(`/message/${userId}`);
     return response;
   } catch (error) {
     console.error('Get messages error:', error);
@@ -123,7 +123,7 @@ export const sendMessage = async (userId, messageData) => {
       payload.image = base64Image;
     }
 
-    const response = await httpClient.post(`/messages/send/${userId}`, payload);
+    const response = await httpClient.post(`/message/send/${userId}`, payload);
     return response;
   } catch (error) {
     console.error('Send message error:', error);

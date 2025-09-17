@@ -19,12 +19,6 @@ const LoginPage = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Redirect authenticated users to intended page or chat
-  if (user) {
-    const from = location.state?.from?.pathname || ROUTES.CHAT;
-    return <Navigate to={from} replace />;
-  }
-
   // Clear errors when component mounts or form data changes
   useEffect(() => {
     if (error) {
@@ -95,6 +89,12 @@ const LoginPage = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Redirect authenticated users to intended page or chat
+  if (user) {
+    const from = location.state?.from?.pathname || ROUTES.CHAT;
+    return <Navigate to={from} replace />;
+  }
 
   return (
     <div className="login-page">

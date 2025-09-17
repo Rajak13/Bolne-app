@@ -24,11 +24,6 @@ const SignupPage = () => {
   const [profilePreview, setProfilePreview] = useState(null);
   const [passwordStrength, setPasswordStrength] = useState('');
 
-  // Redirect authenticated users to chat page
-  if (user) {
-    return <Navigate to={ROUTES.CHAT} replace />;
-  }
-
   // Clear errors when component mounts or form data changes
   useEffect(() => {
     if (error) {
@@ -205,6 +200,11 @@ const SignupPage = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Redirect authenticated users to chat page
+  if (user) {
+    return <Navigate to={ROUTES.CHAT} replace />;
+  }
 
   return (
     <div className="signup-page">

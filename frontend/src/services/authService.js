@@ -30,7 +30,7 @@ export const signup = async (userData) => {
     // Store token and user data on successful signup
     if (response.token) {
       httpClient.setAuthToken(response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.setItem('user', JSON.stringify(response));
     }
     
     return response;
@@ -57,7 +57,7 @@ export const login = async (credentials) => {
     // Store token and user data on successful login
     if (response.token) {
       httpClient.setAuthToken(response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.setItem('user', JSON.stringify(response));
     }
     
     return response;
