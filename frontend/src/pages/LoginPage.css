@@ -1,0 +1,217 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-white) 100%);
+  padding: var(--spacing-4);
+}
+
+.login-form-container {
+  background: var(--color-white);
+  padding: var(--spacing-10);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--color-gray-200);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.login-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: var(--spacing-2);
+}
+
+.login-subtitle {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-2);
+}
+
+.login-button {
+  width: 100%;
+}
+
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password-link {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.forgot-password-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.auth-links p {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.auth-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.auth-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--color-error);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+  animation: shake 0.5s ease-in-out;
+}
+
+.success-message {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: var(--color-success);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Loading state */
+.login-form-container--loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-page {
+    padding: var(--spacing-2);
+  }
+  
+  .login-form-container {
+    padding: var(--spacing-6);
+    max-width: 100%;
+  }
+  
+  .login-title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Focus states for accessibility */
+.login-form-container:focus-within {
+  box-shadow: var(--shadow-xl), 0 0 0 2px var(--color-primary-light);
+}
+
+/* Hover effects */
+.login-form-container {
+  transition: all var(--transition-normal);
+}
+
+.login-form-container:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+/* Form validation styles */
+.form-group.has-error .input-container {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Remember me checkbox */
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+}

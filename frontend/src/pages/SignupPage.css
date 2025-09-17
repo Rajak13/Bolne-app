@@ -1,0 +1,330 @@
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-white) 100%);
+  padding: var(--spacing-4);
+}
+
+.signup-form-container {
+  background: var(--color-white);
+  padding: var(--spacing-10);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid var(--color-gray-200);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.signup-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: var(--spacing-2);
+}
+
+.signup-subtitle {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-2);
+}
+
+.signup-button {
+  width: 100%;
+}
+
+/* Profile Picture Upload */
+.profile-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.profile-preview {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: var(--border-radius-full);
+  border: 3px solid var(--color-gray-200);
+  overflow: hidden;
+  background-color: var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.profile-preview:hover {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.profile-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-placeholder {
+  font-size: var(--font-size-2xl);
+  color: var(--color-gray-400);
+}
+
+.profile-upload-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-upload-input {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.profile-remove-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-error);
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.profile-remove-button:hover {
+  background-color: #dc2626;
+  transform: scale(1.1);
+}
+
+.upload-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+/* Terms and Conditions */
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  line-height: 1.5;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.terms-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.terms-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.auth-links p {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.auth-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.auth-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--color-error);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+  animation: shake 0.5s ease-in-out;
+}
+
+.success-message {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: var(--color-success);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Loading state */
+.signup-form-container--loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .signup-page {
+    padding: var(--spacing-2);
+  }
+  
+  .signup-form-container {
+    padding: var(--spacing-6);
+    max-width: 100%;
+  }
+  
+  .signup-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .profile-preview {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Focus states for accessibility */
+.signup-form-container:focus-within {
+  box-shadow: var(--shadow-xl), 0 0 0 2px var(--color-primary-light);
+}
+
+/* Hover effects */
+.signup-form-container {
+  transition: all var(--transition-normal);
+}
+
+.signup-form-container:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+/* Form validation styles */
+.form-group.has-error .input-container {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* File upload drag and drop styles */
+.profile-preview.drag-over {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  opacity: 0.8;
+}
+
+/* Password strength indicator */
+.password-strength {
+  margin-top: var(--spacing-2);
+}
+
+.password-strength-bar {
+  height: 4px;
+  background-color: var(--color-gray-200);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.password-strength-fill {
+  height: 100%;
+  transition: all var(--transition-normal);
+  border-radius: var(--border-radius-sm);
+}
+
+.password-strength-fill.weak {
+  width: 33%;
+  background-color: var(--color-error);
+}
+
+.password-strength-fill.medium {
+  width: 66%;
+  background-color: var(--color-warning);
+}
+
+.password-strength-fill.strong {
+  width: 100%;
+  background-color: var(--color-success);
+}
+
+.password-strength-text {
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-1);
+  color: var(--color-gray-500);
+}

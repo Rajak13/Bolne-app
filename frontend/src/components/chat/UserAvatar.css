@@ -1,0 +1,140 @@
+/* UserAvatar Component Styles */
+.user-avatar {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.user-avatar--clickable {
+  cursor: pointer;
+}
+
+.user-avatar--clickable:hover .user-avatar__image-container {
+  transform: scale(1.05);
+}
+
+.user-avatar__image-container {
+  position: relative;
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  background-color: var(--color-gray-200);
+  transition: transform var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Size variants */
+.user-avatar--small .user-avatar__image-container {
+  width: 32px;
+  height: 32px;
+}
+
+.user-avatar--medium .user-avatar__image-container {
+  width: 40px;
+  height: 40px;
+}
+
+.user-avatar--large .user-avatar__image-container {
+  width: 56px;
+  height: 56px;
+}
+
+.user-avatar--extra-large .user-avatar__image-container {
+  width: 80px;
+  height: 80px;
+}
+
+.user-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-full);
+}
+
+.user-avatar__initials {
+  font-weight: 600;
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-full);
+}
+
+/* Initials font sizes for different avatar sizes */
+.user-avatar--small .user-avatar__initials {
+  font-size: var(--font-size-xs);
+}
+
+.user-avatar--medium .user-avatar__initials {
+  font-size: var(--font-size-sm);
+}
+
+.user-avatar--large .user-avatar__initials {
+  font-size: var(--font-size-lg);
+}
+
+.user-avatar--extra-large .user-avatar__initials {
+  font-size: var(--font-size-xl);
+}
+
+/* Online status indicator */
+.user-avatar__status {
+  position: absolute;
+  border: 2px solid var(--color-white);
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-gray-400);
+}
+
+/* Status sizes for different avatar sizes */
+.user-avatar--small .user-avatar__status {
+  width: 10px;
+  height: 10px;
+  bottom: -1px;
+  right: -1px;
+}
+
+.user-avatar--medium .user-avatar__status {
+  width: 12px;
+  height: 12px;
+  bottom: -1px;
+  right: -1px;
+}
+
+.user-avatar--large .user-avatar__status {
+  width: 16px;
+  height: 16px;
+  bottom: 0;
+  right: 0;
+}
+
+.user-avatar--extra-large .user-avatar__status {
+  width: 20px;
+  height: 20px;
+  bottom: 2px;
+  right: 2px;
+}
+
+.user-avatar__status--online {
+  background-color: var(--color-success);
+}
+
+.user-avatar__status--offline {
+  background-color: var(--color-gray-400);
+}
+
+/* Hover effects */
+.user-avatar--clickable:hover .user-avatar__status--online {
+  background-color: var(--color-success);
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-success);
+}
+
+/* Focus styles for accessibility */
+.user-avatar--clickable:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-full);
+}

@@ -1,0 +1,233 @@
+/* Header Component Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) var(--spacing-6);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+  min-height: 70px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.header__sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.header__sidebar-toggle:hover {
+  background-color: var(--color-gray-100);
+}
+
+.header__hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  height: 16px;
+  justify-content: space-between;
+}
+
+.header__hamburger span {
+  display: block;
+  height: 2px;
+  background-color: var(--color-gray-700);
+  border-radius: 1px;
+  transition: all var(--transition-fast);
+}
+
+.header__selected-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+}
+
+.header__user-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.header__user-name {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__user-status {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  display: block;
+}
+
+.header__app-title h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.header__current-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-lg);
+  transition: background-color var(--transition-fast);
+}
+
+.header__current-user:hover {
+  background-color: var(--color-gray-50);
+}
+
+.header__profile-avatar {
+  cursor: pointer;
+}
+
+.header__current-user-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-gray-700);
+  white-space: nowrap;
+}
+
+.header__menu-button {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-lg);
+}
+
+.header__menu-button:hover {
+  color: var(--color-primary);
+  background-color: var(--color-gray-50);
+}
+
+/* Profile Modal Styles */
+.header__profile-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4);
+  text-align: center;
+}
+
+.header__profile-avatar-large {
+  margin-bottom: var(--spacing-2);
+}
+
+.header__profile-info h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin: 0 0 var(--spacing-2) 0;
+  color: var(--color-gray-900);
+}
+
+.header__profile-info p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.header__profile-actions {
+  display: flex;
+  gap: var(--spacing-3);
+  width: 100%;
+  justify-content: center;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-3) var(--spacing-4);
+    min-height: 60px;
+  }
+
+  .header__sidebar-toggle {
+    display: flex;
+  }
+
+  .header__left {
+    gap: var(--spacing-3);
+  }
+
+  .header__user-name {
+    font-size: var(--font-size-base);
+  }
+
+  .header__current-user-name {
+    display: none;
+  }
+
+  .header__right {
+    gap: var(--spacing-2);
+  }
+
+  .header__menu-button {
+    padding: var(--spacing-2);
+    min-width: auto;
+  }
+
+  .header__app-title h1 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+
+  .header__left {
+    gap: var(--spacing-2);
+  }
+
+  .header__user-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .header__profile-actions {
+    flex-direction: column;
+  }
+}
+
+/* Animation for hamburger menu */
+.header__sidebar-toggle:hover .header__hamburger span:nth-child(1) {
+  transform: translateY(1px);
+}
+
+.header__sidebar-toggle:hover .header__hamburger span:nth-child(3) {
+  transform: translateY(-1px);
+}
+
+/* Focus styles for accessibility */
+.header__sidebar-toggle:focus-visible,
+.header__current-user:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,177 @@
+/* ChatPage Component Styles */
+.chat-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-gray-50);
+  overflow: hidden;
+  position: relative;
+}
+
+.chat-page__content {
+  flex: 1;
+  display: flex;
+  min-height: 0; /* Important for flex scrolling */
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+/* Desktop layout */
+@media (min-width: 769px) {
+  .chat-page {
+    height: 100vh;
+  }
+  
+  .chat-page__content {
+    /* Sidebar and chat area are side by side */
+  }
+}
+
+/* Tablet and Mobile layout */
+@media (max-width: 768px) {
+  .chat-page {
+    height: 100vh;
+    height: 100dvh; /* Use dynamic viewport height on mobile */
+    padding-bottom: 80px; /* Account for bottom navigation */
+  }
+  
+  .chat-page__content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  .chat-page {
+    padding-bottom: 70px; /* Smaller bottom bar on very small screens */
+  }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .chat-page {
+    padding-bottom: 60px; /* Smaller bottom bar in landscape */
+  }
+}
+
+/* Safe area insets for devices with notches/home indicators */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 768px) {
+    .chat-page {
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .chat-page {
+      padding-bottom: calc(70px + env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media (max-width: 768px) and (orientation: landscape) {
+    .chat-page {
+      padding-bottom: calc(60px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Responsive header visibility */
+@media (max-width: 768px) {
+  .chat-page .desktop-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .chat-page .mobile-only {
+    display: none;
+  }
+}
+
+/* Animation states */
+.chat-page--sidebar-open {
+  /* Additional styles when sidebar is open on mobile */
+}
+
+.chat-page--sidebar-closed {
+  /* Additional styles when sidebar is closed on mobile */
+}
+
+.chat-page--swipping {
+  /* Disable text selection during swipe */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Swipe indicator for mobile */
+@media (max-width: 768px) {
+  .chat-page::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(220, 38, 38, 0.3),
+      transparent
+    );
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .chat-page--sidebar-closed::before {
+    opacity: 1;
+  }
+  
+  .chat-page--swipping::before {
+    opacity: 0;
+  }
+}
+
+/* Focus management for accessibility */
+.chat-page:focus-within {
+  /* Maintain focus outline visibility */
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .chat-page {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-black);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .chat-page__content {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .chat-page {
+    height: auto;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+  
+  .chat-page__content {
+    display: block;
+    height: auto;
+  }
+  
+  .mobile-only {
+    display: none !important;
+  }
+}

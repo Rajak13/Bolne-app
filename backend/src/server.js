@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
-import cookieParser from 'cookie-parser'  
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 import authRoutes from './routes/auth.route.js'
 import messageRoutes from './routes/message.route.js'
@@ -12,6 +13,20 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:5173', // Vite dev server (default)
+    'http://localhost:5174', // Vite dev server (alternative port)
+    'http://localhost:3000', // Backend server (for same-origin requests)
+    ENV.CLIENT_URL || 'http://localhost:5173' // From environment variable
+  ],
+  credentials: true, // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
