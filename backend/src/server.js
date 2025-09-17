@@ -19,6 +19,7 @@ const corsOptions = {
     'http://localhost:5173', // Vite dev server (default)
     'http://localhost:5174', // Vite dev server (alternative port)
     'http://localhost:3000', // Backend server (for same-origin requests)
+    'https://bolne.sevalla.app', // Production domain
     ENV.CLIENT_URL || 'http://localhost:5173' // From environment variable
   ],
   credentials: true, // Allow cookies to be sent
